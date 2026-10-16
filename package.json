@@ -1,0 +1,21 @@
+{
+  "name": "securedb-api",
+  "version": "1.0.0",
+  "description": "API REST demonstrando práticas de segurança na camada de banco de dados PostgreSQL: Check Constraints, Views e Princípio do Menor Privilégio.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "db:up": "docker-compose up -d",
+    "db:down": "docker-compose down",
+    "db:reset": "docker-compose down -v && docker-compose up -d"
+  },
+  "keywords": ["security", "postgresql", "express", "check-constraints", "least-privilege"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  }
+}

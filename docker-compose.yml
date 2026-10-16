@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: securedb-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: securedb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: Admin@2024!
+    ports:
+      - "5432:5432"
+    volumes:
+      # Monta o script de inicialização — executado automaticamente
+      # na primeira vez que o container é criado
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      # Volume persistente para os dados do banco
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d securedb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+    driver: local
